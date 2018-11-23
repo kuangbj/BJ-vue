@@ -33,9 +33,7 @@
       <div class="ind_con1">
         <h2 class="title"><a href="#" class="more">more</a>净美仕产品</h2>
         <ul class="clearfloat">
-          <li><a href="#" class="link"><img src="../assets/images/01.jpg" alt=""/></a></li>
-          <li><a href="#" class="link"><img src="../assets/images/02.jpg" alt=""/></a></li>
-          <li><a href="#" class="link"><img src="../assets/images/03.jpg" alt=""/></a></li>
+          <li v-for="(v,i) in liImg" :key="i"><a href="#" class="link"><img :src='v' alt=""/></a></li>
         </ul>
       </div>
       <div class="ind_con2 clearfloat">
@@ -78,7 +76,12 @@ export default {
         '净美仕新风净化系统　助力校园新风行动',
         '全国新风行动全面启动 助推净美仕战略升级',
         '智能空气净化器翻盘：净美仕能否领衔?'
-      ]
+      ],
+      liImg:[
+        require('../assets/images/01.jpg'),
+        require('../assets/images/02.jpg'),
+        require('../assets/images/03.jpg')
+        ]
     }
   },
   methods:{
