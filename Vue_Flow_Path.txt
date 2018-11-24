@@ -1,0 +1,5 @@
+npm i  安装依赖包
+npm install -g @vue/cli 安装脚手架工具
+vue create *** 新建项目 
+npm run serve 项目启动
+npm run build 打包
