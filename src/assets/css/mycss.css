@@ -285,6 +285,7 @@
     border-color: #ddd;
     color:#ddd;
     cursor: default;
+    pointer-events: none;
 }
 /*��Ʒ����ҳ*/
 .pd_info {

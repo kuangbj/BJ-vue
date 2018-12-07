@@ -12,20 +12,19 @@ function main(){
     if(sessionStorage.uid){
         uid=sessionStorage.uid;
         //console.log(uid);
-        var text='<li class="top_user"><a href="">'+sessionStorage.uname+'</a></li><li class="top_quit"><a href="">退出</a></li>';
+        var text='<li class="top_user"><router-link to="">'+sessionStorage.uname+'<router-link></li><li class="top_quit"><router-link to="">退出<router-link></li>';
         $(".h_con>ul").append(text);
         $(".top_quit").click(function(){
             sessionStorage.clear();
         });
     }else{
-        var text='<li><a href="login.html" class="h_login">登录</a></li><li><em>|</em></li><li><a href="register.html" class="h_register">注册</a></li>';
+        var text='<li><router-link to="/login" class="h_login">登录<router-link></li><li><em>|</em></li><li><router-link to="/register" class="h_register">注册<router-link></li>';
         $(".h_con>ul").append(text);
     }
     //刷新购物车
     cartUpdate(uid);
 }
 function navText(text){
-    //console.log(text);
     $(".nav>ul>li").each(function(){
         var thisText=$(this).children("a").text();
         if(thisText==text){
@@ -46,21 +45,19 @@ function dateFormat(time){
 }
 
 function cartUpdate(uid){
-    //console.log(uid);
     $.ajax({
         type:"post",
         url:"data/cart_detail_select.php",
         data:{uid:sessionStorage.uid},
         success:function(d){
-            console.log(d);
             var data= d.products;
             var listHtml="";
             var count=0;
             var priceSum=0;
             for(var i=0;i< data.length;i++){
-                listHtml+='<li><a href=""><img src="'
+                listHtml+='<li><router-link to=""><img src="'
                 +data[i].pic
-                +'" alt=""/></a><div><span>-</span><input type="text" value="'
+                +'" alt=""/><router-link><div><span>-</span><input type="text" value="'
                 +data[i].count
                 +'"/><span>+</span></div><strong>¥'
                 +data[i].price*data[i].count

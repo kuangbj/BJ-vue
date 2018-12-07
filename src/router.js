@@ -51,11 +51,11 @@ export default new Router({
       component:NewDetails
     },
     {
-      path:'/product',
+      path:'/product/:type',
       component:Product
     },
     {
-      path:'/pdetails',
+      path:'/pdetails/:pid',
       component:ProductDetails
     }
   ]

@@ -31,20 +31,21 @@
       <div class="container">
         <div class="nav">
           <ul>
-            <li><a href="index.html"><span class="icon_home"></span>首页</a></li>
-            <li><a href="about.html">关于净美仕</a></li>
-            <li><a href="news.html">公司动态</a></li>
+            <li><a href=""><span class="icon_home"></span>首页</a></li>
+            <li><a href="">关于净美仕</a></li>
+            <li><a href="">公司动态</a></li>
             <li class="nav_pd">
-              <a href="product.html">产品中心<span class="icon_pd"></span></a>
+              <router-link to="/product/1">产品中心<span class="icon_pd"></span></router-link>
               <div class="pd_dropdown">
-                <a href="product.html?type=2">净美仕滤网</a>
+                <router-link to="/product/1">净美仕滤网</router-link>
+                <router-link to="/product/2">净美仕滤器</router-link>
               </div>
             </li>
             <li><a href="contact.html">联系我们</a></li>
           </ul>
         </div>
         <div class="s_cart" @mouseover="showCart()" @mouseout="hideCart()">
-          <a href="cart.html">
+          <a href="">
             <span class="icon_cart"></span>购物车(<strong id="cart_sum">0</strong>)<span class="icon_sj"></span>
           </a>
           <div class="cart_dropdown">
