@@ -11,44 +11,72 @@
     </div>
     <!--页面主体-->
     <div class="main container">
-      <div class="pd_info clearfloat">
-        <div class="pdinfo_img">
-          <img src="" alt=""/>
+      <template v-if="pdata !== null">
+        <div class="pd_info clearfloat">
+          <div class="pdinfo_img">
+            <img :src="require('../assets/'+pdata.pic)" alt=""/>
+          </div>
+          <div class="pdinfo_text">
+            <h2></h2>
+            <ul>
+              <li>型号：{{pdata.model}}</li>
+              <li>功能：{{pdata.func}}</li>
+              <li>噪音：{{pdata.noise}}</li>
+              <li>风量：{{pdata.wind}}</li>
+              <li>适用对象：{{pdata.applyTo}}</li>
+              <li>适用面积：{{pdata.size}}</li>
+              <li>空气净化能效等级：{{pdata.level}}</li>
+            </ul>
+            <p>价格：<span>¥</span><strong id="price">{{pdata.price}}</strong></p>
+            <a @click.prevent="gocart()" href="" id="addCart"><span class="icon_cart"></span>加入购物车</a>
+          </div>
         </div>
-        <div class="pdinfo_text">
-          <h2></h2>
-          <ul>
-            <li>型号：M8088A</li>
-            <li>功能：定时、除甲醛、杀菌</li>
-            <li>噪音：19-60dB</li>
-            <li>风量：690m³/小时</li>
-            <li>适用对象：商用、家用</li>
-            <li>适用面积：41㎡-60㎡</li>
-            <li>空气净化能效等级：合格级</li>
-          </ul>
-          <p>价格：<span>¥</span><strong id="price"></strong></p>
-          <a href="" id="addCart"><span class="icon_cart"></span>加入购物车</a>
+        <div class="details_box">
+          <h2 class="title">产品详情</h2>
+          <div class="pd_details" v-html="pdata.detail"></div>
         </div>
-      </div>
-      <div class="details_box">
-        <h2 class="title">产品详情</h2>
-        <div class="pd_details">
-          <p>家用除甲醛静音M-8088A，带大脑的空气净化器。家用除甲醛静音M-8088A，带大脑的空气净化器。家用除甲醛静音M-8088A，带大脑的空气净化器。家用除甲醛静音M-8088A，带大脑的空气净化器。家用除甲醛静音M-8088A，带大脑的空气净化器。家用除甲醛静音M-8088A，带大脑的空气净化器。家用除甲醛静音M-8088A，带大脑的空气净化器。</p>
-          <img src="product-imgs/m8088a/01.jpg" alt=""/>
-          <img src="product-imgs/m8088a/02.jpg" alt=""/>
-          <img src="product-imgs/m8088a/03.jpg" alt=""/>
-          <img src="product-imgs/m8088a/04.jpg" alt=""/>
-          <img src="product-imgs/m8088a/05.jpg" alt=""/>
-          <img src="product-imgs/m8088a/06.jpg" alt=""/>
-        </div>
-      </div>
+      </template>
     </div>
     <apf></apf>
   </div>
 </template>
 <script>
+import axios from 'axios';
+
 export default {
-  
+  data:function(){
+    return{
+      pdata:null, //存数据
+    }
+  },
+  methods:{
+    gaindata(){
+      let url = `http://127.0.0.1/data/product_detail.php?pid=${this.$route.params.pid}`;
+      axios.get(url).then((res)=>{
+        this.pdata = res.data;
+      }).catch((err)=>{
+        console.log(err);
+      });
+    },
+    gocart(){
+      if(sessionStorage.uid){
+        let url = `http://127.0.0.1/data/cart_detail_add.php?uid=1&pid=${this.$route.params.pid}`;
+        axios.get(url).then((res)=>{
+          console.log(res);
+          if(res.data.code == 1){
+            alert('成功');
+          }else{
+            alert('失败.请重试!');
+          }
+        }).catch((err)=>{
+          console.log(err);
+        });
+      }
+    }
+  },
+  created:function(){
+    this.gaindata();
+  }
 }
 </script>
 
